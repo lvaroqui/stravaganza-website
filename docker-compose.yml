@@ -1,0 +1,11 @@
+version: '3'
+services:
+  front:
+    image: node:12
+    volumes:
+      - ./front:/usr/src/service
+    working_dir: /usr/src/service
+    entrypoint: ./entrypoint.sh
+    command: yarn run dev
+    ports:
+      - 3000:3000
