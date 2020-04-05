@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
 
-scripts/lint-staged.sh
+front/scripts/lint-staged.sh
