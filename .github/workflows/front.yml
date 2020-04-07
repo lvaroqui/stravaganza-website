@@ -12,7 +12,7 @@ on:
 
 jobs:
 
-  build: 
+  build-front: 
 
     runs-on: ubuntu-latest
 
