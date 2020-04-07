@@ -10,7 +10,7 @@ fi
 git stash --keep-index
 
 # Running Lint on staged files
-docker-compose run front yarn lint $FILES
+docker-compose run --rm front yarn lint $FILES
 ret=$?
 
 git stash pop

@@ -1,2 +1,2 @@
 #!/bin/sh
-cp scripts/hooks/* .git/hooks/
+install --mode=0755 scripts/hooks/pre-commit .git/hooks
