@@ -1,5 +1,5 @@
 <template>
   <div>
-    Hello World !
+    Perdu
   </div>
 </template>
