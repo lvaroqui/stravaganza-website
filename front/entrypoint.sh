@@ -5,7 +5,7 @@ if [[ $@ == "clean" ]]; then
     rm -rf node_modules
   fi
   if [[ -d .nuxt ]]; then
-    rm -rf nuxt
+    rm -rf .nuxt
   fi
   exit 0
 fi
