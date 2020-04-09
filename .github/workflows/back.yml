@@ -40,7 +40,5 @@ jobs:
       working-directory: back
     
     - name: Run phpunit
-      uses: php-actions/phpunit@v1
-      with:
-        config: back/phpunit.xml
-        bootstrap: back/vendor/autoload.php
+      run: phpunit
+      working-directory: back
