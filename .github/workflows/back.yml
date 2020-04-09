@@ -6,6 +6,8 @@ name: Back CI
 # events but only for the master branch
 on:
   push:
+    paths: 
+      - "back/**"
     branches: [ master, develop ]
   pull_request:
     paths: 
