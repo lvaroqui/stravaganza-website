@@ -43,3 +43,4 @@ jobs:
       uses: php-actions/phpunit@v1
       with:
         config: back/phpunit.xml
+        bootstrap: back/vendor/autoload.php
