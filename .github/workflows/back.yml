@@ -6,16 +6,18 @@ name: Back CI
 # events but only for the master branch
 on:
   push:
-    paths: "back/**"
+    paths: 
+      - "back/**"
     branches: [ master, develop ]
   pull_request:
-    paths: "back/**"
+    paths: 
+      - "back/**"
     branches: [ master, develop ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  build-back:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -24,18 +26,23 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
     
-    - working-directory: back
-    
+    - name: setup-php
+      uses: khs1994-docker/actions-setup-php@0.0.1
+      with:
+        php_version: 7.4
+        php_type: composer
+
     - name: Set env
       run: cp .env.example .env
+      working-directory: back
 
     # Runs a single command using the runners shell
     - name: Install dependences
-      uses: MilesChou/composer-action/7.4/install@v1.0.1
-
-    # Runs a set of commands using the runners shell
-    - name: Install phpunit
-      run: apt install -y phpunit
+      run: composer install
+      working-directory: back
     
     - name: Run phpunit
-      run: phpunit
+      uses: php-actions/phpunit@v1
+      with:
+        config: back/phpunit.xml
+        bootstrap: back/vendot/autoload.php 
