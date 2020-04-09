@@ -23,17 +23,22 @@ services:
     volumes:
       - ./back:/opt/laravel
     working_dir: /opt/laravel
-    entrypoint: composer install
+    command: sh -c "touch lock && composer install && rm lock"
 
   back:
     image: php:7.4-cli
     volumes:
       - ./back:/opt/laravel
     working_dir: /opt/laravel
-    command: php -S 0.0.0.0:8000 -t public
+    command: ./scripts/wait.sh php -S 0.0.0.0:8000 -t public
     ports:
       - 8000:8000
     links:
       - database
     depends_on:
       - composer
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
