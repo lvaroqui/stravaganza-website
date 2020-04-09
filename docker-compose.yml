@@ -9,3 +9,31 @@ services:
     command: yarn run dev
     ports:
       - 3000:3000
+
+  database:
+    image: mariadb:bionic
+    environment:
+      MYSQL_USER: stravaganza
+      MYSQL_PASSWORD: stravaganza
+      MYSQL_DATABASE: stravaganza
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+
+  composer:
+    image: composer:latest
+    volumes:
+      - ./back:/opt/laravel
+    working_dir: /opt/laravel
+    command: composer install
+
+  back:
+    image: php:7.4-cli
+    volumes:
+      - ./back:/opt/laravel
+    working_dir: /opt/laravel
+    command: php -S 0.0.0.0:8000 -t public
+    ports:
+      - 8000:8000
+    links:
+      - database
+    depends_on:
+      - composer
