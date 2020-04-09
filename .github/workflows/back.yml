@@ -25,7 +25,7 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    
+
     - name: setup-php
       uses: khs1994-docker/actions-setup-php@0.0.1
       with:
@@ -40,7 +40,7 @@ jobs:
     - name: Install dependences
       run: composer install
       working-directory: back
-    
+
     - name: Run phpunit
       run: phpunit
       working-directory: back
