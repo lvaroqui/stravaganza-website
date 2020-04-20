@@ -1,10 +1,13 @@
-version: '3'
+version: "3"
 services:
   front:
     image: node:12
+    environment:
+      YARN_CACHE_FOLDER: /opt/yarn-cache
     volumes:
-      - ./front:/usr/src/service
-    working_dir: /usr/src/service
+      - ./front:/opt/nuxt
+      - yarn-cache:/opt/yarn-cache
+    working_dir: /opt/nuxt
     entrypoint: ./entrypoint.sh
     command: yarn run dev
     ports:
@@ -42,3 +45,6 @@ services:
       interval: 30s
       timeout: 5s
       retries: 5
+
+volumes:
+  yarn-cache:

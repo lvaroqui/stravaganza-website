@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Stravaganza
+  license:
+    name: MIT
+  description: API for Stravaganza website
+  contact:
+    name: Rémy Huet
+    email: remy.huet@etu.utc.fr
+paths:
+  /users:
+    get:
+      operationId: listUsers
+      responses:
+        '200':
+          description: A list of all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          headers: {}
+      description: List all users
+      tags:
+        - Stravaganza
+  /concerts:
+    get:
+      description: List all concerts
+      operationId: listConcerts
+      responses:
+        '200':
+          description: A list of all concerts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Concert'
+      tags:
+        - Stravaganza
+  /users/me:
+    get:
+      summary: Your GET endpoint
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+      operationId: getCurrentUser
+      description: Get current authenticated user
+      tags:
+        - Stravaganza
+servers:
+  - url: 'https://assos.utc.fr/stravaganza/api'
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      description: ''
+      properties:
+        id:
+          type: integer
+          minimum: 0
+        name:
+          type: string
+          x-faker: name.firstName
+        email:
+          type: string
+          x-faker: internet.email
+          format: email
+      required:
+        - id
+        - name
+        - email
+      x-tags:
+        - Stravaganza
+    Concert:
+      title: Concert
+      type: object
+      properties:
+        id:
+          type: integer
+          minimum: 0
+        name:
+          type: string
+        date:
+          type: string
+          format: date
+      x-tags:
+        - Stravaganza

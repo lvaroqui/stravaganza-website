@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "Running lint-staged"
-FILES=$(git diff --name-only --cached | grep -E "^front/.*\.(js|ts|vue)$" | cut -c 7-)
+FILES=$(git diff --name-only --cached | grep -Ev "^front/api/.*$" | grep -E "^front/.*\.(js|ts|vue)$" | cut -c 7-)
 
 if [[ -z $FILES ]]; then
   echo "No files to lint"
